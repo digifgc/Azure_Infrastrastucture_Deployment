@@ -8,30 +8,43 @@ resource "azurerm_resource_group" "testehp8_rg" {
     location = var.testehp8_location
 }
 
-resource "azurerm_virtual_network" "oztestehp8_vnet" {
+/*resource "azurerm_virtual_network" "oztestehp8_vnet" {
   name = "${var.resource_prefix}-vnet"
   location = var.testehp8_location
   resource_group_name = azurerm_resource_group.testehp8_rg.name
   address_space = [var.testehp8_address_space]
-}
+}*/
 
-resource "azurerm_subnet" "oztestehp8_subnet" {
+/*resource "azurerm_subnet" "oztestehp8_subnet" {
   name = "${var.resource_prefix}-subnet"
   resource_group_name = azurerm_resource_group.testehp8_rg.name
   virtual_network_name = azurerm_virtual_network.oztestehp8_vnet.name
   address_prefix = var.testehp8_address_prefix
-}
+}*/
 
 resource "azurerm_network_interface" "testehp8_nic" {
   name = "${var.testehp8_name}-nic"
   location = var.testehp8_location
   resource_group_name = azurerm_resource_group.testehp8_rg.name
 
-  ip_configuration {
+  /*ip_configuration {
     name = "${var.testehp8_name}-ip"
     subnet_id = azurerm_subnet.oztestehp8_subnet.id
     private_ip_address_allocation = "dynamic"
     public_ip_address_id = azurerm_public_ip.testehp8_public_ip.id
+  }*/
+
+    ip_configuration {
+
+    name                          = "internal"
+
+    subnet_id                     = "/subscriptions/b683882d-5be0-4948-b46b-b2e9ac036d0b/resourceGroups/ITC-Lab-Network-uswest2-RG/providers/Microsoft.Network/virtualNetworks/itc-sap-usw2-VNet/subnets/itc-saplab-subnet"
+
+
+    private_ip_address_allocation = "Dynamic"
+
+    public_ip_address_id = azurerm_public_ip.testehp8_public_ip.id
+
   }
 }
 
