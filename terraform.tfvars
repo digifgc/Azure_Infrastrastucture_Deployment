@@ -1,0 +1,7 @@
+testehp8_location = "westus2"
+testehp8_rg = "oztestehp8-rg"
+resource_prefix = "oztestehp8-server"
+testehp8_address_space = "1.0.0.0/22"
+testehp8_address_prefix = "1.0.1.0/24"
+testehp8_name = "ozeh2"
+environment = "development"
